@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="hadoop, My Blog">
+    <meta name="keywords" content="Flink Job submit (local模式)大致流程, My Blog">
     <meta name="description" content="Simple">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>hadoop | My Blog</title>
+    <title>Flink Job submit (local模式)大致流程 | My Blog</title>
     <link rel="icon" type="image/png" href="/img/http.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hadoop</h1>
+                    <h1 class="description center-align post-title">Flink Job submit (local模式)大致流程</h1>
                 </div>
             </div>
         </div>
@@ -281,104 +281,10 @@
 
 
 
-<main class="post-container content">
+<main class="container content">
 
     
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        padding: 35px 0 15px 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        padding-bottom: 30px;
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-
-        position: absolute;
-        right: 23.5vw;
-        display: block;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+    <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -387,8 +293,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hadoop/">
-                                <span class="chip bg-color">hadoop</span>
+                            <a href="/tags/flink/">
+                                <span class="chip bg-color">flink</span>
+                            </a>
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/bigdata/">
+                                <span class="chip bg-color">bigdata</span>
                             </a>
                         
                     </div>
@@ -412,7 +326,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-06
+                    2021-03-08
                 </div>
                 
 
@@ -433,19 +347,17 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HSFS"><a href="#HSFS" class="headerlink" title="HSFS"></a>HSFS</h1><h2 id="HDFS组成"><a href="#HDFS组成" class="headerlink" title="HDFS组成"></a>HDFS组成</h2><h3 id="client-客户端"><a href="#client-客户端" class="headerlink" title="client 客户端"></a>client 客户端</h3><ul>
-<li>文件切分，文件上载到HDFS时，client将文件切分成一个个的block块然后进行存储</li>
-<li>与namenode交互，获取文件位置信息</li>
-<li>与datanode交互，读取 写入数据</li>
-<li>client提供一些命令来管理hdfs<h3 id="namenode"><a href="#namenode" class="headerlink" title="namenode"></a>namenode</h3></li>
-<li>管理HDFS的名称空间</li>
-<li>管理数据快的映射信息</li>
-<li>管理副本策略</li>
-<li>负责客户端的读写策略<h3 id="datanode"><a href="#datanode" class="headerlink" title="datanode"></a>datanode</h3></li>
-<li>存储实际的数据块</li>
-<li>执行数据块的读写操作<h3 id="secondary-namenode"><a href="#secondary-namenode" class="headerlink" title="secondary namenode"></a>secondary namenode</h3></li>
-<li>辅助namenode 分担其工作量　定期合并日志和镜像文件，并推送给namenode</li>
-</ul>
+                <h1 id="Flink-Job-执行流程"><a href="#Flink-Job-执行流程" class="headerlink" title="Flink Job 执行流程"></a>Flink Job 执行流程</h1><hr>
+<ol>
+<li>本地environment.execute();<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StreamExecutionEnvironment environment &#x3D; StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">environment.execute();</span><br></pre></td></tr></table></figure></li>
+<li>execute() 最终为executeAsync(streamGraph)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public JobExecutionResult execute(StreamGraph streamGraph) throws Exception &#123;</span><br><span class="line">        &#x2F;&#x2F;environment.getStreamGraph() 获取streamGraph 流程图</span><br><span class="line">		final JobClient jobClient &#x3D; executeAsync(streamGraph);&#x2F;&#x2F;调用</span><br><span class="line"></span><br><span class="line">		try &#123;</span><br><span class="line">			final JobExecutionResult jobExecutionResult;</span><br><span class="line"></span><br><span class="line">			if (configuration.getBoolean(DeploymentOptions.ATTACHED)) &#123;</span><br><span class="line">				jobExecutionResult &#x3D; jobClient.getJobExecutionResult(userClassloader).get();</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				jobExecutionResult &#x3D; new DetachedJobExecutionResult(jobClient.getJobID());</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			jobListeners.forEach(jobListener -&gt; jobListener.onJobExecuted(jobExecutionResult, null));</span><br><span class="line"></span><br><span class="line">			return jobExecutionResult;</span><br><span class="line">		&#125; catch (Throwable t) &#123;</span><br><span class="line">			jobListeners.forEach(jobListener -&gt; &#123;</span><br><span class="line">				jobListener.onJobExecuted(null, ExceptionUtils.stripExecutionException(t));</span><br><span class="line">			&#125;);</span><br><span class="line">			ExceptionUtils.rethrowException(t);</span><br><span class="line"></span><br><span class="line">			&#x2F;&#x2F; never reached, only make javac happy</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>executeAsync(streamGraph) 进入Executor<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public JobClient executeAsync(StreamGraph streamGraph) throws Exception &#123;</span><br><span class="line">		checkNotNull(streamGraph, &quot;StreamGraph cannot be null.&quot;);</span><br><span class="line">		checkNotNull(configuration.get(DeploymentOptions.TARGET), &quot;No execution.target specified in your configuration file.&quot;);</span><br><span class="line"></span><br><span class="line">		final PipelineExecutorFactory executorFactory &#x3D;</span><br><span class="line">			executorServiceLoader.getExecutorFactory(configuration);</span><br><span class="line">        &#x2F;&#x2F; PipelineExecutorFactory 分为local和remote 分别获取LocalExecutor RemoteExecutor</span><br><span class="line">		checkNotNull(</span><br><span class="line">			executorFactory,</span><br><span class="line">			&quot;Cannot find compatible factory for specified execution.target (&#x3D;%s)&quot;,</span><br><span class="line">			configuration.get(DeploymentOptions.TARGET));</span><br><span class="line"></span><br><span class="line">		CompletableFuture&lt;JobClient&gt; jobClientFuture &#x3D; executorFactory</span><br><span class="line">			.getExecutor(configuration)</span><br><span class="line">            &#x2F;&#x2F; 此时为localExecutor</span><br><span class="line">			.execute(streamGraph, configuration);</span><br><span class="line"></span><br><span class="line">		try &#123;</span><br><span class="line">			JobClient jobClient &#x3D; jobClientFuture.get();</span><br><span class="line">			jobListeners.forEach(jobListener -&gt; jobListener.onJobSubmitted(jobClient, null));</span><br><span class="line">			return jobClient;</span><br><span class="line">		&#125; catch (Throwable t) &#123;</span><br><span class="line">			jobListeners.forEach(jobListener -&gt; jobListener.onJobSubmitted(null, t));</span><br><span class="line">			ExceptionUtils.rethrow(t);</span><br><span class="line"></span><br><span class="line">			&#x2F;&#x2F; make javac happy, this code path will not be reached</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在Executor 中提交 submitJob<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">	public CompletableFuture&lt;JobClient&gt; execute(Pipeline pipeline, Configuration configuration) throws Exception &#123;</span><br><span class="line">		checkNotNull(pipeline);</span><br><span class="line">		checkNotNull(configuration);</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F; we only support attached execution with the local executor.</span><br><span class="line">		checkState(configuration.getBoolean(DeploymentOptions.ATTACHED));</span><br><span class="line"></span><br><span class="line">		final JobGraph jobGraph &#x3D; getJobGraph(pipeline, configuration);</span><br><span class="line">		final MiniCluster miniCluster &#x3D; startMiniCluster(jobGraph, configuration); &#x2F;&#x2F; local模式下会构建使用 </span><br><span class="line">        remote中是根据config中的JobManagerOptions.ADDRESS和JobManagerOptions.PORT构建clusterClient</span><br><span class="line">		final MiniClusterClient clusterClient &#x3D; new MiniClusterClient(configuration, miniCluster);</span><br><span class="line"></span><br><span class="line">		CompletableFuture&lt;JobID&gt; jobIdFuture &#x3D; clusterClient.submitJob(jobGraph);</span><br><span class="line"></span><br><span class="line">		jobIdFuture</span><br><span class="line">				.thenCompose(clusterClient::requestJobResult)</span><br><span class="line">				.thenAccept((jobResult) -&gt; clusterClient.shutDownCluster());</span><br><span class="line"></span><br><span class="line">		return jobIdFuture.thenApply(jobID -&gt;</span><br><span class="line">				new ClusterClientJobClientAdapter&lt;&gt;(() -&gt; clusterClient, jobID));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>由MiniClusterClient提交至MiniCluster<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public CompletableFuture&lt;JobSubmissionResult&gt; submitJob(JobGraph jobGraph) &#123;</span><br><span class="line">		final CompletableFuture&lt;DispatcherGateway&gt; dispatcherGatewayFuture &#x3D; getDispatcherGatewayFuture();</span><br><span class="line">		final CompletableFuture&lt;InetSocketAddress&gt; blobServerAddressFuture &#x3D; createBlobServerAddress(dispatcherGatewayFuture);</span><br><span class="line">		final CompletableFuture&lt;Void&gt; jarUploadFuture &#x3D; uploadAndSetJobFiles(blobServerAddressFuture, jobGraph);</span><br><span class="line">		final CompletableFuture&lt;Acknowledge&gt; acknowledgeCompletableFuture &#x3D; jarUploadFuture</span><br><span class="line">			.thenCombine(</span><br><span class="line">				dispatcherGatewayFuture,</span><br><span class="line">                &#x2F;&#x2F;dispatcherGateway 提交</span><br><span class="line">				(Void ack, DispatcherGateway dispatcherGateway) -&gt; dispatcherGateway.submitJob(jobGraph, rpcTimeout))</span><br><span class="line">			.thenCompose(Function.identity());</span><br><span class="line">		return acknowledgeCompletableFuture.thenApply(</span><br><span class="line">			(Acknowledge ignored) -&gt; new JobSubmissionResult(jobGraph.getJobID()));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>抽象类dispatcher实现submitJob最终调用internalSubmitJob(jobGraph);<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">private CompletableFuture&lt;Acknowledge&gt; internalSubmitJob(JobGraph jobGraph) &#123;</span><br><span class="line">		log.info(&quot;Submitting job &#123;&#125; (&#123;&#125;).&quot;, jobGraph.getJobID(), jobGraph.getName());</span><br><span class="line"></span><br><span class="line">		final CompletableFuture&lt;Acknowledge&gt; persistAndRunFuture &#x3D; </span><br><span class="line">            &#x2F;&#x2F; 执行任务 触发JobManager 调用persistAndRunJob</span><br><span class="line">            waitForTerminatingJobManager(jobGraph.getJobID(), jobGraph, this::persistAndRunJob)</span><br><span class="line">			.thenApply(ignored -&gt; Acknowledge.get());</span><br><span class="line"></span><br><span class="line">		return persistAndRunFuture.handleAsync((acknowledge, throwable) -&gt; &#123;</span><br><span class="line">			if (throwable !&#x3D; null) &#123;</span><br><span class="line">				cleanUpJobData(jobGraph.getJobID(), true);</span><br><span class="line"></span><br><span class="line">				final Throwable strippedThrowable &#x3D; ExceptionUtils.stripCompletionException(throwable);</span><br><span class="line">				log.error(&quot;Failed to submit job &#123;&#125;.&quot;, jobGraph.getJobID(), strippedThrowable);</span><br><span class="line">				throw new CompletionException(</span><br><span class="line">					new JobSubmissionException(jobGraph.getJobID(), &quot;Failed to submit job.&quot;, strippedThrowable));</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				return acknowledge;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;, getRpcService().getExecutor());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用runjob构架createJobManagerRunner()即由jobManagerRunnerFactory 在DefaultJobManagerRunnerFactory 创建 createJobManagerRunner,最终实现类为JobManagerRunnerImpl<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">private CompletableFuture&lt;Void&gt; runJob(JobGraph jobGraph) &#123;</span><br><span class="line">		Preconditions.checkState(!jobManagerRunnerFutures.containsKey(jobGraph.getJobID()));</span><br><span class="line"></span><br><span class="line">		final CompletableFuture&lt;JobManagerRunner&gt; jobManagerRunnerFuture &#x3D; createJobManagerRunner(jobGraph);</span><br><span class="line"></span><br><span class="line">		jobManagerRunnerFutures.put(jobGraph.getJobID(), jobManagerRunnerFuture);</span><br><span class="line"></span><br><span class="line">		return jobManagerRunnerFuture</span><br><span class="line">			.thenApply(FunctionUtils.uncheckedFunction(this::startJobManagerRunner))</span><br><span class="line">			.thenApply(FunctionUtils.nullFn())</span><br><span class="line">			.whenCompleteAsync(</span><br><span class="line">				(ignored, throwable) -&gt; &#123;</span><br><span class="line">					if (throwable !&#x3D; null) &#123;</span><br><span class="line">						jobManagerRunnerFutures.remove(jobGraph.getJobID());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				getMainThreadExecutor());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>JobManagerRunnerImpl的构造方法中由jobMasterFactory创建jobMasterService 即JobMaster<br>JobMaster会构建createScheduler() 即调度器 在SchedulerBase中会将JobGraph转成executionGraph<br>最后会在schedulerNG调度器中触发任务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">private ExecutionGraph createAndRestoreExecutionGraph(</span><br><span class="line">		JobManagerJobMetricGroup currentJobManagerJobMetricGroup,</span><br><span class="line">		ShuffleMaster&lt;?&gt; shuffleMaster,</span><br><span class="line">		JobMasterPartitionTracker partitionTracker) throws Exception &#123;</span><br><span class="line">     &#x2F;&#x2F; 转成executionGraph</span><br><span class="line">		ExecutionGraph newExecutionGraph &#x3D; createExecutionGraph(currentJobManagerJobMetricGroup, shuffleMaster, partitionTracker);</span><br><span class="line"></span><br><span class="line">		final CheckpointCoordinator checkpointCoordinator &#x3D; newExecutionGraph.getCheckpointCoordinator();</span><br><span class="line"></span><br><span class="line">     &#x2F;&#x2F; 此处判断该任务是否从checkpoint中构建 即可以在JobGraph配置SavepointRestoreSettings可以实现从checkpoint中恢复任务(待测试)</span><br><span class="line">     &#x2F;&#x2F; 在命令行中指定SAVEPOINT_PATH_OPTION或者checkpoint路径时也会走到这 具体见CliFrontend</span><br><span class="line">		if (checkpointCoordinator !&#x3D; null) &#123;</span><br><span class="line">			&#x2F;&#x2F; check whether we find a valid checkpoint</span><br><span class="line">			if (!checkpointCoordinator.restoreLatestCheckpointedState(</span><br><span class="line">				new HashSet&lt;&gt;(newExecutionGraph.getAllVertices().values()),</span><br><span class="line">				false,</span><br><span class="line">				false)) &#123;</span><br><span class="line"></span><br><span class="line">				&#x2F;&#x2F; check whether we can restore from a savepoint</span><br><span class="line">				tryRestoreExecutionGraphFromSavepoint(newExecutionGraph, jobGraph.getSavepointRestoreSettings());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return newExecutionGraph;</span><br><span class="line">	&#125;</span><br><span class="line"> private void resetAndStartScheduler() throws Exception &#123;</span><br><span class="line"> 		validateRunsInMainThread();</span><br><span class="line"> </span><br><span class="line"> 		final CompletableFuture&lt;Void&gt; schedulerAssignedFuture;</span><br><span class="line"> </span><br><span class="line"> 		if (schedulerNG.requestJobStatus() &#x3D;&#x3D; JobStatus.CREATED) &#123;</span><br><span class="line"> 			schedulerAssignedFuture &#x3D; CompletableFuture.completedFuture(null);</span><br><span class="line"> 			schedulerNG.setMainThreadExecutor(getMainThreadExecutor());</span><br><span class="line"> 		&#125; else &#123;</span><br><span class="line"> 			suspendAndClearSchedulerFields(new FlinkException(&quot;ExecutionGraph is being reset in order to be rescheduled.&quot;));</span><br><span class="line"> 			final JobManagerJobMetricGroup newJobManagerJobMetricGroup &#x3D; jobMetricGroupFactory.create(jobGraph);</span><br><span class="line"> 			final SchedulerNG newScheduler &#x3D; createScheduler(newJobManagerJobMetricGroup);</span><br><span class="line"> </span><br><span class="line"> 			schedulerAssignedFuture &#x3D; schedulerNG.getTerminationFuture().handle(</span><br><span class="line"> 				(ignored, throwable) -&gt; &#123;</span><br><span class="line"> 					newScheduler.setMainThreadExecutor(getMainThreadExecutor());</span><br><span class="line"> 					assignScheduler(newScheduler, newJobManagerJobMetricGroup);</span><br><span class="line"> 					return null;</span><br><span class="line"> 				&#125;</span><br><span class="line"> 			);</span><br><span class="line"> 		&#125;</span><br><span class="line"> </span><br><span class="line"> 		schedulerAssignedFuture.thenRun(this::startScheduling);</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
                 
             </div>
@@ -462,7 +374,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">科技的发达</a>
+                    <a href="/about" rel="external nofollow noreferrer">yhd</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -472,7 +384,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/06/hadoop/">http://example.com/2021/03/06/hadoop/</a>
+                    <a href="http://example.com/2021/03/08/flink/flink-job-submit-flow/">http://example.com/2021/03/08/flink/flink-job-submit-flow/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -485,7 +397,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">科技的发达</a>
+                    <a href="/about" target="_blank">yhd</a>
                     !
                 </span>
             </div>
@@ -510,8 +422,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hadoop/">
-                                    <span class="chip bg-color">hadoop</span>
+                                <a href="/tags/flink/">
+                                    <span class="chip bg-color">flink</span>
+                                </a>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/bigdata/">
+                                    <span class="chip bg-color">bigdata</span>
                                 </a>
                             
                         </div>
@@ -557,12 +477,11 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/06/hadoop/">
+                <a href="/2021/03/08/Java/hadoop/">
                     <div class="card-image">
                         
                         
@@ -578,9 +497,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -593,7 +512,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -612,7 +530,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/06/Java/">
+                <a href="/2021/03/06/Java/Java/">
                     <div class="card-image">
                         
                         
@@ -671,100 +589,6 @@
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
 
     
 
